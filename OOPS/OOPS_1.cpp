@@ -35,6 +35,13 @@ class student
         cout<<"Destructor Called"<<endl; 
     }
 
+    void inside()
+    {
+        cout<<"Hello I am inside class function"<<endl;
+    }
+
+    void outside(); 
+
     void setName(string s) // to get input for private data members 
     {
         name = s; 
@@ -55,16 +62,23 @@ class student
         cout<<isMale<<endl; 
     }
  
-    bool operator == (student &a) /* Operator Overloading */
-    {
-        if(name==a.name && age==a.age && isMale=a.isMale )
-        {
-            return true;
-        }
-        return false; 
-    }
+    /* Showing Error  */
+
+    // bool operator == (student &a) /* Operator Overloading */
+    // {
+    //     if(name==a.name && age==a.age && isMale=a.isMale )
+    //     {
+    //         return true;
+    //     }
+    //     return false; 
+    // }
 
 };
+
+void student :: outside()
+{
+    cout<<"Hello I am outside class function"<<endl;    
+}
 
 int main()
 {
@@ -95,6 +109,11 @@ int main()
     
     // student c(a); 
     student c = a; // copy constructor
+
+    b.inside(); // call to function which is declared inside of the class
+
+    b.outside(); // call to function which is declared outside of the class
+
     /*
         we also have a default copy constructor but for our knowledge here we make a copy constructor 
     */
