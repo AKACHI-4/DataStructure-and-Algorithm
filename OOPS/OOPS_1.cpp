@@ -61,7 +61,6 @@ class student
         cout<<"IsMale = ";
         cout<<isMale<<endl; 
     }
- 
     /* Showing Error  */
 
     // bool operator == (student &a) /* Operator Overloading */
@@ -72,7 +71,6 @@ class student
     //     }
     //     return false; 
     // }
-
 };
 
 void student :: outside()
