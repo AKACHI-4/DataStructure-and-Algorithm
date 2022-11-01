@@ -61,16 +61,14 @@ class student
         cout<<"IsMale = ";
         cout<<isMale<<endl; 
     }
-
-    bool operator == (student &obj) /* Operator Overloading */
-    {
-        if((name==obj.name) && (age==obj.age) && (isMale==obj.isMale) )
-        {
-            return true;
-        }
-        return false; 
-    }
-
+    // bool operator == (student &a) /* Operator Overloading */
+    // {
+    //     if(name==a.name && age==a.age && isMale=a.isMale )
+    //     {
+    //         return true;
+    //     }
+    //     return false; 
+    // }
 };
 
 void student :: outside()
