@@ -38,7 +38,7 @@ string InfixToPrefix(string s)
         }
         else
         {
-            while(!st.empty() && prec(st.top())>prec(s[i]))
+            while(!st.empty() && prec(st.top())>=prec(s[i]))
             {
                 ans += st.top(); 
                 st.pop(); 
