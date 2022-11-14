@@ -1,6 +1,6 @@
 # DateStructure-and-Algorithm
 
-<img align="right" alt="GIF" src="https://user-images.githubusercontent.com/99159580/201569405-bbabf139-a967-4b44-8870-56b3301d500c.jpg" width="400px" height="250" />
+<img align="right" alt="GIF" src="https://user-images.githubusercontent.com/99159580/201569405-bbabf139-a967-4b44-8870-56b3301d500c.jpg" width="350px" height="250" />
 
 A data structure is a named location that can be used to store and organize data.
 
@@ -23,7 +23,7 @@ A data structure is a named location that can be used to store and organize data
    <td>Misc</td>
  </tr><tr>
    <td>Binary Search Tree</td>
-   <td>Advanced Data Structure</td>
+   <td>Advanced DS</td>
  </tr>
 </table>
 
