@@ -1,4 +1,4 @@
-/* Hlo Brother I m the big brother of Character array */
+ /* Hlo Brother I m the big brother of Character array */
 
 #include<bits/stdc++.h>
 #include<string>

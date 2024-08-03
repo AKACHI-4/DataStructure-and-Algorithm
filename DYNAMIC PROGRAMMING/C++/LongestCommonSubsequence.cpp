@@ -49,15 +49,22 @@ signed main(){
 
     rep(i,0,n+1){
         rep(j,0,m+1){
-            if(i==0 || j==0){
+            if(i==0 || j==0) {
                 DP[i][j] = 0; 
                 continue;
             }
+
             if(a[i-1]==b[j-1])
                 DP[i][j] = 1 + DP[i-1][j-1];
             else
                 DP[i][j] = max(DP[i-1][j],DP[i][j-1]);
         }
+    }
+
+    rep(i, 1, n+1) {
+        rep(j, 1, m+1)
+            cout << DP[i][j] << " ";
+        cout << endl;
     }
 
     cout<<DP[n][m]<<endl;

@@ -17,10 +17,14 @@ vi Prefix(string s){
     }
     return prefix; 
 } // TC : O(n=s)
+
 signed main(){
-    string s1 = "na"; 
+    string s1 = "abcabdecab"; 
     vi prefix = Prefix(s1); 
-    string s2 = "apnacollegena"; 
+    for(int i=0; i<s1.size(); i++)
+        cout<<prefix[i]<<" ";
+    cout<<endl;
+    string s2 = "abcdeabcfjjjjjjabcdeabcf"; 
 
     int pos = -1; 
     int i(0), j(0);

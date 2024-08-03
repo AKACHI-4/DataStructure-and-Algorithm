@@ -42,12 +42,17 @@ void HeapSort(vi &a)
         Heapify(a,n,i);
     } /* convert into MaxHeap */
 
+    for(auto val : a)
+        cout<<val<<" "; 
+    cout<<endl;
+
     /* Heapify Down */
     for(int i=n-1;i>0;i--)
     {
         swap(a[0], a[i]);
 
         Heapify(a,i,0);
+
     }
     
 }
@@ -55,16 +60,19 @@ void HeapSort(vi &a)
 signed main()
 {
     
-    int n; cin>>n; 
+    // int n; cin>>n; 
 
-    vi a(n);
+    // vi a(n);
 
-    rep(i,0,n)
-        cin>>a[i];
+    // rep(i,0,n)
+    //     cin>>a[i];
+
+    vi a = {5,4,1,2,6,3};
 
     HeapSort(a);
 
-    rep(i,0,n)
+    // rep(i,0,n)
+    rep(i,0,6)
         cout<<a[i]<<" ";
 
     return 0;

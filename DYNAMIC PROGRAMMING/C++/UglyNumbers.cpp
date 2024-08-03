@@ -23,7 +23,6 @@ signed main(){
             c3++; 
         if(5*DP[c5]==DP[i])
             c5++; 
-        // two multiple can have same output that's why no else-if
     }
     cout<<DP[pos-1]<<endl;
 
