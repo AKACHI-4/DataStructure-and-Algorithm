@@ -42,20 +42,28 @@ Q.3 Write a program to generate all possible subsets of a set {a, b, c}
 */
 
 // Brute force Approach
-// void subset(int a[], int n){
-//     for(int i=0;i<(1<<n);i++){
-//         for(int j=0;j<n;j++){
-//             if (i & (1<<j))
-//                 cout<<a[j];
-//         }
-//         cout<<endl;
-//     }
-// }
-// int main(){   
-//     int arr[2] = {2, 3};
-//     subset(arr, 2);
-//     return 0; 
-// }
+void subset(int a[], int n){
+
+    for(int i=0;i<(1<<n);i++){
+    	vector<int> temp;
+
+        for(int j=0;j<n;j++){
+        	cout << i << " " << (1 << j) << endl;
+
+            if (i & (1<<j))
+                temp.push_back(a[j]);
+        }
+        cout<<"---- ";
+        for (auto v : temp) cout << v << " ";
+        cout << "\n" << endl;
+    }
+
+}
+int main(){   
+    int arr[3] = {2, 3, 5};
+    subset(arr, 3);
+    return 0; 
+}
 
 // recursive approach
 // void solve(int idx, int sum, vi arr, int N, vi &ans){

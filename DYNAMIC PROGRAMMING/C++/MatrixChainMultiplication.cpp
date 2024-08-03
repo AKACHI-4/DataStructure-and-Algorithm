@@ -70,7 +70,7 @@ signed main(){
         }
     }
 
-    cout<<DP[1][n-1]<<endl;
+    cout<<DP[1][n-1]<<endl; +
 
     return 0;
 }

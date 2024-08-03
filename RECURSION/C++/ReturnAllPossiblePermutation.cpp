@@ -21,19 +21,20 @@ void permute(vector<int> &a, int idx)
     {
         swap(a[i],a[idx]);
         permute(a,idx+1);
-        swap(a[i],a[idx]);
+        swap(a[i],a[idx]); // sort of backtracking here to stay on last combination. 
     }
     return ; 
 }
 int32_t main()
 {
     int n; 
-    cin>>n; 
-    vector<int> a(n);
-    for(auto &i : a)
-    {
-        cin>>i; 
-    }
+    // cin>>n; 
+    // vector<int> a(n);
+    vector<int> a = {1,2,3};
+    // for(auto &i : a)
+    // {
+    //     cin>>i; 
+    // }
     permute(a,0);
     for(auto v : ans)
     {

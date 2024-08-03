@@ -20,6 +20,7 @@ bool IsCycle(int child, vvi &adj, vb &check, int parent){
     }
     return false;
 }
+
 signed main(){  
     int n, m; cin>>n>>m; 
     /* n->edges, m->vertics */
