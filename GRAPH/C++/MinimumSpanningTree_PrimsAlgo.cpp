@@ -2,125 +2,160 @@
 // using namespace std;
 
 // #define vi vector<int> 
-// #define vb vector<bool> 
 // #define vvi vector<vi> 
-// #define rep(i,a,b) for(int i=a;i<b;i++)
 
-// const int N = 1e5+2; 
-// int TreeCost = 0; 
-// vvi adjL_W[N]; 
-// vi Distance(N), Parent(N); // vector Distance is made for self check-in and also for bound into the constraints
-// vb visited(N,false);
-// const int INF = 1e9;
-// // Distance -> EdgeWeight
+// const int N = 1e5+2;
+// vi parent(N);
+// vi Size(N);
 
-// void primsMST(int src){
-//     // intially let suppose all nodes are far more away from each other meanwhile weight of edges is high
-//     for(int i=0;i<N;i++)
-//         Distance[i] = INF;
-//     // set which will we use to store { wt, node/source }
-//     set<vi> s; 
-//     Distance[src] = 0; // bcz we are starting from source so for source to source distance/weight will be zero  
-//     s.insert({0,src});
-//     while(!s.empty()){
-//         auto x = *(s.begin()); // format of elements of set is { weight/distance,vertex } <-> { wt, vertex }
-//         visited[x[1]] = true; // current source/node has been visited
-//         s.erase(x); // erase x so we can put new nodes greedly 
-//         int currsrc = x[1]; 
-//         int currsrcparent = Parent[x[1]];
-//         int currweight = x[0];
-//         cout<<"wt: "<<currweight<<" src: "<<currsrc<<" parent: "<<currsrcparent<<endl;
-//         TreeCost += currweight; 
-
-//         // visit neighbour of x[1]/source
-//         for(auto i : adjL_W[x[1]]){
-//             // i[0] -> neighbour of new source 
-//             // if neighbour is already visited so 
-//             if(visited[i[0]])  continue; 
-            
-//             // greedy approach 
-//             // Distance -> EdgeWeight
-//             // if weight/distance of neighbour is high then actual weight 
-//             if(Distance[i[0]]>i[1]){
-//                 s.erase({Distance[i[0]],i[0]}); // bcz we only need to low weight/Distance Node?
-//                 Distance[i[0]] = i[1]; // coz in format of adjL_W i[1] is weight That's why 
-//                 s.insert({Distance[i[0]],i[0]});
-//                 Parent[i[0]] = x[1]; // bcz we access that through x[1]
-//             }
-//         }
+// void make_set(int a){
+//     parent[a] = a; 
+//     Size[a] = 1; 
+// }
+// int find_set(int a){
+//     if(a==parent[a]) return a; // means leading node 
+//     return parent[a] = find_set(parent[a]); // path comparison 
+// }   
+// void union_set(int a, int b){
+//     a = find_set(a);
+//     b = find_set(b);
+//     if(a!=b){
+//         if(Size[a]<Size[b]) swap(a,b);
+//         parent[b] = a; // (*)
+//         Size[a] += Size[b];
 //     }
 // }
 // signed main(){
+//     for(int i=0;i<N;i++)
+//         make_set(i);
 //     int v, e; cin>>v>>e; 
-//     rep(i,0,e){
-//         int w,u,v; cin>>w>>u>>v; 
-//         adjL_W[u].push_back({v,w});
-//         adjL_W[v].push_back({u,w});
+//     vvi edges;
+//     for(int i=0;i<e;i++){
+//         int w,u,v; cin>>w>>u>>v;
+//         edges.push_back({w,u,v});
 //     }
-//     primsMST(0);
-//     cout<<"Minimum Spanning Tree Cost : "<<TreeCost<<endl; 
+
+//     // Kruskal's Algorithm 
+//     sort(edges.begin(),edges.end()); // because we want minimum
+//     int SpanningTreeCost = 0; 
+//     for(auto it : edges){
+//         int w = it[0], u = it[1], v = it[2];
+//         int a = find_set(u); 
+//         int b = find_set(v);
+//         if(a==b) continue; // cycle exist 
+//         else{ // cycle not exist
+//         union_set(a,b);
+//         cout<<u<<" "<<v<<endl;
+//         SpanningTreeCost += w; 
+//         }    
+//     }
+//     cout<<"SpanningTreeCost : "<<SpanningTreeCost<<endl;
+
 //     return 0;
-// }
+// } // Spanning tree is not connected 
 
 
-#include<bits/stdc++.h> 
+
+#include<bits/stdc++.h>
 using namespace std; 
 
-#define vi vector<int> 
-#define vb vector<bool> 
+#define vi vector<int>
 #define vvi vector<vi> 
-#define rep(i,a,b) for(int i=a;i<b;i++)
+#define rep(i,a,b) for(int i=a; i<b; i++)
 
-const int N = 1e5+2; 
-const int INF = 1e9; 
-vvi adjL[N]; 
-vi Distance(N); 
-vi visited(N, false); 
+vvi edges;
+vi parent, rank;
+int v, e;
 
-int prims(int src) {
+class DSU{
+    vi parent;
+    vi size, rank; 
 
-    for(int i=0; i<N; i++)
-        Distance[i] = INF; 
+    public : 
 
-    set<vi> s; 
-    Distance[src] = 0; 
-    s.insert({0,src});
+    DSU(int n){
+        parent.resize(n); 
+        rank = vi(n,0); 
+        size = vi(n);
+        makeSet(n); 
+    }
+
+    void makeSet(int n) {
+        for(int i=0; i<n; i++)
+            parent[i] = i; 
+    }
+
+    int findPar(int a) {
+        if(parent[a]==a) return parent[a]; 
+        return parent[a] = findPar(parent[a]); 
+    }
+
+    bool unionRank(int a, int b) { 
+        a = findPar(a); 
+        b = findPar(b); 
+
+        if(a == b)
+            return false ; 
+
+        if (rank[a] >= rank[b]) {
+            parent[b] = a; 
+            rank[a]++; 
+        } else { 
+            parent[a] = b; 
+            rank[b]++; 
+        }
+        
+        return true ;
+    }
+
+    bool unionSize(int a, int b) {
+        a = findPar(a); 
+        b = findPar(b); 
+
+        if(a == b)
+            return false ; 
+
+        if (size[a] >= size[b]) {
+            parent[b] = a; 
+            size[a] += size[b]; 
+        } else { 
+            parent[a] = b; 
+            size[b] += size[a]; 
+        }
+        
+        return true ;
+    }
+
+};
+
+int kruskal(int src) {
+
+    int n = edges.size(); 
+    DSU* dsu = new DSU(n); 
 
     int cost = 0; 
-    while(!s.empty()) {
-        auto x = *(s.begin()); 
-        visited[x[1]] = true; 
-        s.erase(x);
-        int cursrc = x[1]; 
-        int curweight = x[0]; 
-        cost += curweight; 
 
-        for(auto it : adjL[cursrc]) {
+    for(int i=0; i<e; i++) {
+        int a = edges[i][1]; 
+        int b = edges[i][2]; 
 
-            if(visited[it[0]])
-                continue; 
-            if(Distance[it[0]] > it[1]) {
-                s.erase({Distance[it[0]],it[0]}); 
-                Distance[it[0]] = it[1]; 
-                s.insert({Distance[it[0]],it[0]}); 
-            }
-
-        }
-    } 
-
+        if(dsu->unionSize(a,b))
+            cost += edges[i][0]; 
+    }
 
     return cost; 
 }
 
-signed main(){
-    int v, e; cin>>v>>e; 
+signed main() { 
+
+    cin>>v>>e; 
     rep(i,0,e) {
-        int w, u, v; cin>>u>>v>>w; 
-        adjL[u].push_back({v,w}); 
-        adjL[v].push_back({u,w}); 
-    }    
+        int w,u,v; cin>>u>>v>>w; 
+        edges.push_back({w,u,v});   
+    }
 
-
-    cout<<"Minimum Spanning tree cost is : "<<prims(0)<<endl;
+    sort(edges.begin(), edges.end()); 
+    cout<<"Minimum Spanning tree cost is : "<<kruskal(0)<<endl;
+    
     return 0; 
 }
